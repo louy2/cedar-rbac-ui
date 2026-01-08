@@ -29,6 +29,9 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
+      - name: Inject Google Analytics
+        run: |
+          sed -i 's~</head>~<!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-GZ8VH2YDPZ"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-GZ8VH2YDPZ");</script></head>~' dist/index.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
