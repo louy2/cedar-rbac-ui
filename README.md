@@ -1,73 +1,72 @@
-# React + TypeScript + Vite
+# Cedar RBAC UI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern React-based user interface for managing Role-Based Access Control (RBAC) policies, designed to work with [Cedar](https://www.cedarpolicy.com/) policy language concepts. This application allows you to visually manage roles, users, resources, and permissions, and preview the resulting policies.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Dashboard Overview**: Get a quick snapshot of total roles, users, and active permissions.
+- **Role Management**: Create, update, and delete roles.
+- **User Management**: Manage users and assign them to roles.
+- **Resource Management**: Define resources and actions available in the system.
+- **Policy Matrix**: Visual representation of permissions across roles and resources.
+- **Policy Preview**: Generate and preview the Cedar policy code based on your configuration.
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Framework**: [React](https://react.dev/)
+- **Build Tool**: [Vite](https://vitejs.dev/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Icons**: [Lucide React](https://lucide.dev/)
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Prerequisites
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Node.js (v20 or higher recommended)
+- npm
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Installation
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd cedar-rbac-ui
+   ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+   The application will be available at `http://localhost:5173`.
+
+## Scripts
+
+- `npm run dev`: Starts the development server.
+- `npm run build`: Type-checks and builds the application for production.
+- `npm run preview`: Preview the production build locally.
+- `npm run lint`: Runs ESLint to check for code quality issues.
+
+## Deployment
+
+This project is configured to deploy to **GitHub Pages** automatically via GitHub Actions.
+
+### Workflow Details
+
+The deployment workflow is defined in `.github/workflows/deploy.yml`. It performs the following steps:
+1. Checks out the code.
+2. Sets up Node.js.
+3. Installs dependencies (`npm ci`).
+4. Builds the project (`npm run build`).
+5. **Injects Google Analytics**: The workflow automatically injects the Google Analytics tracking tag into `dist/index.html` post-build, ensuring that analytics are present in the deployed version without cluttering the source code.
+6. Uploads the build artifact and deploys it to GitHub Pages.
+
+## License
+
+[MIT](LICENSE)
